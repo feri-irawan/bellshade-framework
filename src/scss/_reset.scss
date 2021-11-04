@@ -8,7 +8,7 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
- html {
+html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
 }
@@ -353,11 +353,6 @@ template {
 /**
    * Reset by BshadeUI
    */
-
-* {
-    box-sizing: border-box;
-}
-
 body {
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
         Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji",
@@ -385,4 +380,12 @@ h1,
 a {
     color: inherit;
     text-decoration: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button[disabled] {
+    cursor: not-allowed;
 }
