@@ -1,29 +1,24 @@
-@mixin overflow($sumbu: false, $screen: false) {
-    $prefix: "";
-    @if $screen != false {
-        $prefix: $screen + "\\:";
-    }
-
+@mixin overflow($sumbu: false, $prefix: "") {
     $overflow: (auto, hidden, scroll, visible) !default;
 
     @if $sumbu == false {
-        @each $overflow in $overflow {
-            .#{$prefix}overflow-#{$overflow} {
-                overflow: $overflow;
+        @each $value in $overflow {
+            .#{$prefix}overflow-#{$value} {
+                overflow: $value;
             }
         }
     } @else {
         @if $sumbu == x {
-            @each $overflow in $overflow {
-                .#{$prefix}overflow-x-#{$overflow} {
-                    overflow-x: $overflow;
+            @each $value in $overflow {
+                .#{$prefix}overflow-x-#{$value} {
+                    overflow-x: $value;
                 }
             }
         }
         @if $sumbu == y {
-            @each $overflow in $overflow {
-                .#{$prefix}overflow-y-#{$overflow} {
-                    overflow-y: $overflow;
+            @each $value in $overflow {
+                .#{$prefix}overflow-y-#{$value} {
+                    overflow-y: $value;
                 }
             }
         }
@@ -36,10 +31,11 @@
 @include overflow($sumbu: y);
 
 @each $key, $value in $breakpoints {
+    $prefix: $key + "\\:";
     @include screen($key) {
-        @include overflow($screen: $key);
+        @include overflow($prefix: $prefix);
 
-        @include overflow($sumbu: x, $screen: $key);
-        @include overflow($sumbu: y, $screen: $key);
+        @include overflow($sumbu: x, $prefix: $prefix);
+        @include overflow($sumbu: y, $prefix: $prefix);
     }
 }
