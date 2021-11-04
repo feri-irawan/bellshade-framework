@@ -1,9 +1,4 @@
-@mixin visibility($screen: false) {
-    $prefix: "";
-    @if $screen != false {
-        $prefix: $screen + "\\:";
-    }
-
+@mixin visibility($prefix: "") {
     $visibility-values: (
         'visible': visible,
         'invisible': hidden,
@@ -18,11 +13,12 @@
 
 @include visibility();
 
-@each $key, $value in $breakpoints {
-    @include screen($key) {
-        @include visibility($key);
-    }
-}
+@each $key, $value in $breakpoints { 
+    $prefix: $key + "\\:"; 
+    @include screen($key) { 
+        @include visibility($prefix); 
+    } 
+} 
 
 // Value yang kemungkinan dimasukkin ke dalam plugin
 // 'collapse': collapse

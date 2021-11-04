@@ -1,9 +1,4 @@
-@mixin text-align($screen: false) {
-    $prefix: "";
-    @if $screen != false {
-        $prefix: $screen + "\\:";
-    }
-
+@mixin text-align($prefix: "") {
     $text-align-values: (
         center,
         left,
@@ -20,8 +15,9 @@
 
 @include text-align();
 
-@each $key, $value in $breakpoints {
-    @include screen($key) {
-        @include text-align($key);
-    }
-}
+@each $key, $value in $breakpoints { 
+    $prefix: $key + "\\:"; 
+    @include screen($key) { 
+        @include text-align($prefix); 
+    } 
+} 

@@ -1,9 +1,4 @@
-@mixin cursor($screen: false) {
-    $prefix: "";
-    @if $screen != false {
-        $prefix: $screen + "\\:";
-    }
-
+@mixin cursor($prefix: "") {
     $cursor-values: (
         auto,
         pointer,
@@ -29,11 +24,12 @@
 
 @include cursor();
 
-@each $key, $value in $breakpoints {
-    @include screen($key) {
-        @include cursor($key);
-    }
-}
+@each $key, $value in $breakpoints { 
+    $prefix: $key + "\\:"; 
+    @include screen($key) { 
+        @include cursor($prefix); 
+    } 
+} 
 
 // Value yang kemungkinan dimasukkin ke dalam plugin
 // w-resize,
