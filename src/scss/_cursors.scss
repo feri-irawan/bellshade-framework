@@ -1,0 +1,52 @@
+@mixin cursor($screen: false) {
+    $prefix: "";
+    @if $screen != false {
+        $prefix: $screen + "\\:";
+    }
+
+    $cursor-values: (
+        auto,
+        col-resize,
+        default,
+        grab,
+        grabbing,
+        move,
+        none,
+        not-allowed,
+        row-resize,
+        text,
+        zoom-in,
+        zoom-out
+    ) !default;
+
+    @each $value in $cursor-values {
+        .#{$prefix}cursor-#{$value} {
+            cursor: $value;
+        }
+    }
+}
+
+@include cursor();
+
+@each $key, $value in $breakpoints {
+    @include screen($key) {
+        @include cursor($key);
+    }
+}
+
+// Value yang kemungkinan dimasukkin ke dalam plugin
+// w-resize,
+// wait,
+// s-resize,
+// se-resize,
+// sw-resize,
+// pointer,
+// progress,
+// n-resize,
+// ne-resize,
+// nesw-resize,
+// ns-resize,
+// nw-resize,
+// nwse-resize,
+// no-drop,
+// help,
